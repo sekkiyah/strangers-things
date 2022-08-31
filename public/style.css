@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap');
+
+* {
+  font-family: 'Crimson Text', serif;
+}
+
+#app {
+  /* background-color: #202020; */
+  text-align: center;
+}
+
+#logo {
+  width: 35px;
+  height: 35px;
+}
