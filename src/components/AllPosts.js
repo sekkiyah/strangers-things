@@ -1,14 +1,14 @@
 import React from 'react';
-import { Card, ListGroup } from 'react-bootstrap';
+import { Button, Card, ListGroup } from 'react-bootstrap';
 
-const AllPosts = ({ allPosts }) => {
+const AllPosts = ({ allPosts, userId }) => {
   return (
     <ListGroup variant='flush'>
       {allPosts &&
         allPosts.map((post) => {
-          const { description, location, price, title, _id } = post;
+          const { description, location, price, title, _id, author } = post;
           return (
-            <ListGroup.Item key={_id} className='p-3'>
+            <ListGroup.Item key={_id} className='px-1 pt-1 pb-3 mb-3'>
               {/* <h2>{title}</h2>
                 <p>Description: {description}</p>
                 <p>Price: {price}</p>
@@ -17,6 +17,13 @@ const AllPosts = ({ allPosts }) => {
               <Card.Text>Description: {description}</Card.Text>
               <Card.Text>Price: {price}</Card.Text>
               <Card.Text>Location: {location}</Card.Text>
+              {author._id === userId ? (
+                <Button>This is your post</Button>
+              ) : (
+                <Button variant='success'>
+                  Send message to {author.username}
+                </Button>
+              )}
             </ListGroup.Item>
           );
         })}
