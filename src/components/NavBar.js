@@ -22,21 +22,24 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn, setJwt }) => {
           <Nav.Link as={Link} to='/posts'>
             Posts
           </Nav.Link>
-          <Nav.Link as={Link} to='/profile'>
-            Profile
-          </Nav.Link>
+
           {isLoggedIn ? (
-            <Nav.Link
-              as={Link}
-              to='/'
-              onClick={() => {
-                window.localStorage.removeItem('jwt');
-                setJwt('');
-                setIsLoggedIn(false);
-              }}
-            >
-              Log Out
-            </Nav.Link>
+            <>
+              <Nav.Link as={Link} to='/profile'>
+                Profile
+              </Nav.Link>
+              <Nav.Link
+                as={Link}
+                to='/'
+                onClick={() => {
+                  window.localStorage.removeItem('jwt');
+                  setJwt('');
+                  setIsLoggedIn(false);
+                }}
+              >
+                Log Out
+              </Nav.Link>
+            </>
           ) : (
             <Nav.Link as={Link} to='/login'>
               Log In

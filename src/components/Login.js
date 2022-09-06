@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Form, Button, Card } from 'react-bootstrap';
+import { Form, Button, Card, FloatingLabel, Alert } from 'react-bootstrap';
 import { loginUser } from '../api';
 
 const Login = ({ setJwt, navigate, setIsLoggedIn }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async () => {
     await loginUser(username, password).then((result) => {
@@ -14,56 +15,65 @@ const Login = ({ setJwt, navigate, setIsLoggedIn }) => {
         window.localStorage.setItem('jwt', result.data.token);
         navigate('/');
       } else {
-        console.error(result.error);
+        setErrorMessage(result.error.message);
       }
     });
   };
 
   return (
-    <Card className='flex-fill m-5 shadow'>
-      <Card.Header as='h3' className='text-center'>
-        Welcome, please sign in
-      </Card.Header>
-      <Form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSubmit();
-        }}
-      >
-        <Form.Group className='m-3' controlId='formBasicEmail'>
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Enter username'
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </Form.Group>
+    <>
+      <Card className='flex-fill m-5 shadow'>
+        <Card.Header as='h3' className='text-center'>
+          Welcome, please sign in
+        </Card.Header>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+        >
+          <Form.Group className='m-3'>
+            <FloatingLabel label='Username'>
+              <Form.Control
+                id='username'
+                type='text'
+                placeholder='Enter username'
+                required
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </FloatingLabel>
+          </Form.Group>
 
-        <Form.Group className='m-3' controlId='formBasicPassword'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Password'
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group className='m-3' controlId='formBasicCheckbox'>
-          <Form.Check type='checkbox' label='Keep me logged in' />
-        </Form.Group>
-        <Form.Group className='m-3 gap-2'>
-          <Button variant='primary' type='submit' className=''>
-            Login
-          </Button>
-          <Button
-            variant='success'
-            className='mx-2'
-            onClick={() => navigate('/register')}
-          >
-            Register
-          </Button>
-        </Form.Group>
-      </Form>
-    </Card>
+          <Form.Group className='m-3'>
+            <FloatingLabel label='Password'>
+              <Form.Control
+                id='password'
+                type='password'
+                placeholder='Password'
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </FloatingLabel>
+          </Form.Group>
+          <Form.Group className='m-3' controlId='keepMeLoggedIn'>
+            <Form.Check type='checkbox' label='Keep me logged in' />
+          </Form.Group>
+          <Form.Group className='m-3'>
+            <Button variant='primary' type='submit'>
+              Login
+            </Button>
+            <Button
+              variant='success'
+              className='mx-2'
+              onClick={() => navigate('/register')}
+            >
+              Register
+            </Button>
+          </Form.Group>
+        </Form>
+      </Card>
+      {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
+    </>
   );
 };
 
