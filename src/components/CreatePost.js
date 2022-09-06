@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
+import { createPost } from '../api';
 
-const CreatePost = () => {
+const CreatePost = ({ jwt }) => {
   const [post, setPost] = useState({});
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -10,6 +11,11 @@ const CreatePost = () => {
   const [willDeliver, setWillDeliver] = useState(false);
 
   const handleSubmit = async () => {
+    const response = await createPost(post, jwt);
+    console.log(response);
+  };
+
+  useEffect(() => {
     setPost({
       title: title,
       description: description,
@@ -17,7 +23,7 @@ const CreatePost = () => {
       location: location,
       willDeliver: willDeliver,
     });
-  };
+  }, [title, description, price, location, willDeliver]);
 
   return (
     <>

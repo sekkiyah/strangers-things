@@ -71,5 +71,18 @@ export const getUserData = async (jwt) => {
 };
 
 export const createPost = async (post, jwt) => {
-  return 'Created post';
+  try {
+    const header = makeHeaders(jwt);
+    return await fetch(`${baseURL}/posts`, {
+      method: 'POST',
+      headers: header,
+      body: JSON.stringify({
+        post: post,
+      }),
+    })
+      .then((response) => response.json())
+      .then((result) => result.data);
+  } catch (err) {
+    console.error(err);
+  }
 };

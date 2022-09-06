@@ -2,7 +2,7 @@ import React from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { AllPosts, MyPosts, CreatePost } from '../components/';
 
-const Posts = ({ allPosts, isLoggedIn, user: { posts, _id } }) => {
+const Posts = ({ allPosts, isLoggedIn, jwt, user: { posts, _id } }) => {
   return (
     <>
       <Tabs
@@ -22,7 +22,7 @@ const Posts = ({ allPosts, isLoggedIn, user: { posts, _id } }) => {
         )}
         {isLoggedIn && (
           <Tab eventKey='create-post' title='Create Post' variant='success'>
-            <CreatePost />
+            <CreatePost jwt={jwt} />
           </Tab>
         )}
       </Tabs>

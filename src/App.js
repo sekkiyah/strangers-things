@@ -47,7 +47,12 @@ const App = () => {
           <Route
             path='/posts'
             element={
-              <Posts user={user} allPosts={allPosts} isLoggedIn={isLoggedIn} />
+              <Posts
+                user={user}
+                allPosts={allPosts}
+                isLoggedIn={isLoggedIn}
+                jwt={jwt}
+              />
             }
           />
           <Route path='/profile' element={<Profile />} />
