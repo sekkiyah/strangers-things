@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
+import { getAllPosts } from '../api';
 import { AllPosts, MyPosts, CreatePost } from '../components/';
 
-const Posts = ({ allPosts, isLoggedIn, jwt, user: { posts, _id } }) => {
+const Posts = ({ isLoggedIn, jwt, user: { posts, _id } }) => {
+  const [allPosts, setAllPosts] = useState([]);
+
+  async function fetchPosts() {
+    setAllPosts(await getAllPosts());
+  }
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
   return (
     <>
       <Tabs

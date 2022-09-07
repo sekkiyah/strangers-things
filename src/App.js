@@ -2,20 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Navbar, Register, Login } from './components';
 import { Home, Posts, Profile } from './pages';
-import { getAllPosts, getUserData } from './api';
+import { getUserData } from './api';
 import { Container } from 'react-bootstrap';
 
 const App = () => {
-  const [allPosts, setAllPosts] = useState([]);
   const [jwt, setJwt] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
-
   const navigate = useNavigate();
-
-  async function fetchPosts() {
-    setAllPosts(await getAllPosts());
-  }
 
   function logOut() {
     window.localStorage.removeItem('jwt');
@@ -33,17 +27,11 @@ const App = () => {
       const response = await getUserData(jwt);
       if (response.success) {
         setUser(response.data);
-        console.log('user is');
-        console.log(user);
       } else {
-        console.log('User data not found');
+        console.error('User data not found');
       }
     }
   }
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
 
   useEffect(() => {
     persistLogin();
@@ -54,17 +42,10 @@ const App = () => {
       <Navbar isLoggedIn={isLoggedIn} logOut={logOut} />
       <Container fluid id='main-app'>
         <Routes>
-          <Route path='/' element={<Home id='Home' />} />
+          <Route path='/' element={<Home id='Home' user={user} />} />
           <Route
             path='/posts'
-            element={
-              <Posts
-                user={user}
-                allPosts={allPosts}
-                isLoggedIn={isLoggedIn}
-                jwt={jwt}
-              />
-            }
+            element={<Posts user={user} isLoggedIn={isLoggedIn} jwt={jwt} />}
           />
           <Route path='/profile' element={<Profile />} />
           <Route

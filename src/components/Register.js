@@ -10,8 +10,8 @@ const Register = ({ setJwt, navigate }) => {
   const handleSubmit = async () => {
     await registerUser(username, password).then((result) => {
       if (result.success) {
-        setJwt(result.data.token);
         window.localStorage.setItem('jwt', result.data.token);
+        setJwt(result.data.token);
         navigate('/');
       } else {
         setErrorMessage(result.error.message);
@@ -49,7 +49,7 @@ const Register = ({ setJwt, navigate }) => {
               type='password'
               placeholder='Password'
               required
-              minLength='8'
+              // minLength='8'
               onChange={(e) => setPassword(e.target.value)}
               value={password}
             />
