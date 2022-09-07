@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Card, FloatingLabel, Alert } from 'react-bootstrap';
 import { loginUser } from '../api';
 
-const Login = ({ setJwt, navigate, setIsLoggedIn }) => {
+const Login = ({ setJwt, navigate }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -10,9 +10,8 @@ const Login = ({ setJwt, navigate, setIsLoggedIn }) => {
   const handleSubmit = async () => {
     await loginUser(username, password).then((result) => {
       if (result.success) {
-        setJwt(result.data.token);
-        setIsLoggedIn(true);
         window.localStorage.setItem('jwt', result.data.token);
+        setJwt(result.data.token);
         navigate('/');
       } else {
         setErrorMessage(result.error.message);

@@ -17,30 +17,41 @@ const App = () => {
     setAllPosts(await getAllPosts());
   }
 
-  async function persistLogin() {
-    window.localStorage.getItem('jwt') &&
-      setJwt(window.localStorage.getItem('jwt'));
-    jwt && setIsLoggedIn(true);
+  function logOut() {
+    window.localStorage.removeItem('jwt');
+    setJwt('');
+    setUser({});
+    setIsLoggedIn(false);
   }
 
-  async function getUser() {
-    jwt && setUser(await getUserData(jwt));
-    console.log(user);
+  async function persistLogin() {
+    if (window.localStorage.getItem('jwt')) {
+      setJwt(window.localStorage.getItem('jwt'));
+    }
+    if (jwt) {
+      setIsLoggedIn(true);
+      const response = await getUserData(jwt);
+      if (response.success) {
+        setUser(response.data);
+        console.log('user is');
+        console.log(user);
+      } else {
+        console.log('User data not found');
+      }
+    }
   }
 
   useEffect(() => {
     fetchPosts();
+  }, []);
+
+  useEffect(() => {
     persistLogin();
-    getUser();
   }, [jwt]);
 
   return (
     <>
-      <Navbar
-        isLoggedIn={isLoggedIn}
-        setIsLoggedIn={setIsLoggedIn}
-        setJwt={setJwt}
-      />
+      <Navbar isLoggedIn={isLoggedIn} logOut={logOut} />
       <Container fluid id='main-app'>
         <Routes>
           <Route path='/' element={<Home id='Home' />} />
@@ -62,13 +73,7 @@ const App = () => {
           />
           <Route
             path='/login'
-            element={
-              <Login
-                setJwt={setJwt}
-                navigate={navigate}
-                setIsLoggedIn={setIsLoggedIn}
-              />
-            }
+            element={<Login setJwt={setJwt} navigate={navigate} />}
           />
         </Routes>
       </Container>

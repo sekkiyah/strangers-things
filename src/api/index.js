@@ -62,9 +62,7 @@ export const getUserData = async (jwt) => {
     const header = makeHeaders(jwt);
     return await fetch(`${baseURL}/users/me`, {
       headers: header,
-    })
-      .then((response) => response.json())
-      .then((result) => result.data);
+    }).then((response) => response.json());
   } catch (err) {
     console.error(err);
   }

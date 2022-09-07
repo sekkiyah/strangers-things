@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import logo from '../images/logo.png';
 
-const NavBar = ({ isLoggedIn, setIsLoggedIn, setJwt }) => {
+const NavBar = ({ isLoggedIn, logOut }) => {
   return (
     <Navbar bg='dark' variant='dark'>
       <Container fluid className='d-flex justify-content-end'>
@@ -32,9 +32,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn, setJwt }) => {
                 as={Link}
                 to='/'
                 onClick={() => {
-                  window.localStorage.removeItem('jwt');
-                  setJwt('');
-                  setIsLoggedIn(false);
+                  logOut();
                 }}
               >
                 Log Out
