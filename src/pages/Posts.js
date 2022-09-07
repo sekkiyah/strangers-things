@@ -24,7 +24,7 @@ const Posts = ({ isLoggedIn, jwt, user: { posts, _id } }) => {
         style={{ fontSize: '25px' }}
       >
         <Tab eventKey='all-posts' title='All Posts'>
-          <AllPosts allPosts={allPosts} userId={_id} />
+          <AllPosts allPosts={allPosts} userId={_id} isLoggedIn={isLoggedIn} />
         </Tab>
         {isLoggedIn && (
           <Tab eventKey='my-posts' title='My Posts'>

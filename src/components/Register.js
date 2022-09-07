@@ -49,7 +49,7 @@ const Register = ({ setJwt, navigate }) => {
               type='password'
               placeholder='Password'
               required
-              // minLength='8'
+              minLength='8'
               onChange={(e) => setPassword(e.target.value)}
               value={password}
             />

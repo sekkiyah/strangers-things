@@ -47,7 +47,7 @@ const App = () => {
             path='/posts'
             element={<Posts user={user} isLoggedIn={isLoggedIn} jwt={jwt} />}
           />
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile' element={<Profile user={user} />} />
           <Route
             path='/register'
             element={<Register setJwt={setJwt} navigate={navigate} />}

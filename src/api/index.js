@@ -84,3 +84,8 @@ export const createPost = async (post, jwt) => {
     console.error(err);
   }
 };
+
+export const sendMessage = async (message, messageId, jwt) => {
+  console.log(message);
+  console.log(messageId);
+};

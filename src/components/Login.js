@@ -54,9 +54,9 @@ const Login = ({ setJwt, navigate }) => {
               />
             </FloatingLabel>
           </Form.Group>
-          <Form.Group className='m-3' controlId='keepMeLoggedIn'>
+          {/* <Form.Group className='m-3' controlId='keepMeLoggedIn'>
             <Form.Check type='checkbox' label='Keep me logged in' />
-          </Form.Group>
+          </Form.Group> */}
           <Form.Group className='m-3'>
             <Button variant='primary' type='submit'>
               Login
