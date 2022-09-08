@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Card, ListGroup } from 'react-bootstrap';
 import Message from './Message';
 
-const AllPosts = ({ allPosts, userId, isLoggedIn }) => {
+const AllPosts = ({ allPosts, userId, isLoggedIn, jwt }) => {
   return (
     <ListGroup variant='flush'>
       {allPosts &&
@@ -25,7 +25,7 @@ const AllPosts = ({ allPosts, userId, isLoggedIn }) => {
                     <Button variant='info'>Edit post</Button>
                   ) : (
                     <>
-                      <Message post={post} />
+                      <Message post={post} jwt={jwt} />
                     </>
                   )}
                 </>

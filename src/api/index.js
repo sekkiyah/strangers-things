@@ -77,15 +77,23 @@ export const createPost = async (post, jwt) => {
       body: JSON.stringify({
         post: post,
       }),
-    })
-      .then((response) => response.json())
-      .then((result) => result.data);
+    }).then((response) => response.json());
   } catch (err) {
     console.error(err);
   }
 };
 
 export const sendMessage = async (message, messageId, jwt) => {
-  console.log(message);
-  console.log(messageId);
+  try {
+    const header = makeHeaders(jwt);
+    return await fetch(`${baseURL}/posts/${messageId}/messages`, {
+      method: 'POST',
+      headers: header,
+      body: JSON.stringify({
+        message: message,
+      }),
+    }).then((response) => response.json());
+  } catch (err) {
+    console.error(err);
+  }
 };

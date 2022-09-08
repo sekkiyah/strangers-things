@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 import { sendMessage } from '../api';
 
-const Message = ({ post }) => {
+const Message = ({ post, jwt }) => {
   const { location, price, title, _id, author } = post;
   const [showModal, setShowModal] = useState(false);
   const [messageDetails, setMessageDetails] = useState('');
@@ -13,15 +13,16 @@ const Message = ({ post }) => {
     setMessageDetails('');
   };
 
-  function handleSubmit() {
-    if (messageDetails) {
-      sendMessage({ content: messageDetails }, _id);
+  const handleSubmit = async () => {
+    const response = await sendMessage({ content: messageDetails }, _id, jwt);
+    if (response.success) {
       closeModal();
       setMessageDetails('');
+      console.log(response.data);
     } else {
-      console.error('Insert message');
+      console.error(result.error.message);
     }
-  }
+  };
 
   return (
     <>
@@ -35,16 +36,16 @@ const Message = ({ post }) => {
       </Button>
 
       <Modal show={showModal} onHide={closeModal} style={{ fontSize: '20px' }}>
-        <Modal.Header>
-          <Modal.Title className='w-100 text-center'>New Message</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className='mb-3 pt-1'>
-          <Form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit();
-            }}
-          >
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+        >
+          <Modal.Header>
+            <Modal.Title className='w-100 text-center'>New Message</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className='mb-3 pt-1'>
             <Form.Group as={Row}>
               <Form.Label column sm='2'>
                 Title:
@@ -84,16 +85,16 @@ const Message = ({ post }) => {
                 value={messageDetails}
               />
             </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant='primary' type='submit'>
-            Send
-          </Button>
-          <Button variant='secondary' onClick={closeModal}>
-            Close
-          </Button>
-        </Modal.Footer>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant='primary' type='submit'>
+              Send
+            </Button>
+            <Button variant='secondary' onClick={closeModal}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Form>
       </Modal>
     </>
   );
