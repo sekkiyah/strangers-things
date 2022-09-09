@@ -12,6 +12,8 @@ const Posts = ({ isLoggedIn, jwt, user: { posts, _id } }) => {
 
   useEffect(() => {
     fetchPosts();
+    console.log('All posts below');
+    console.log(allPosts);
   }, []);
 
   return (

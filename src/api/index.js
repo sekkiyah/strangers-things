@@ -21,6 +21,14 @@ export const getAllPosts = async () => {
   }
 };
 
+export const getAllMessages = async () => {
+  try {
+    console.log('all messages');
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const loginUser = async (username, password) => {
   try {
     const header = makeHeaders();
@@ -51,7 +59,7 @@ export const registerUser = async (username, password) => {
           password: password,
         },
       }),
-    }).then((result) => result.json());
+    }).then((response) => response.json());
   } catch (err) {
     console.log('error registering user');
   }
@@ -96,4 +104,8 @@ export const sendMessage = async (message, messageId, jwt) => {
   } catch (err) {
     console.error(err);
   }
+};
+
+export const deleteMessage = async (messageId, jwt) => {
+  console.log('deleted');
 };

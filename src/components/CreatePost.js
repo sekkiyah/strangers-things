@@ -12,7 +12,11 @@ const CreatePost = ({ jwt }) => {
 
   const handleSubmit = async () => {
     const response = await createPost(post, jwt);
-    console.log(response);
+    if (response.success) {
+      console.log('successfully created post');
+    } else {
+      console.error(response.error.message);
+    }
   };
 
   useEffect(() => {
