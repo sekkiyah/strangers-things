@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 
-const Profile = ({ user: { messages, _id } }) => {
+const Profile = ({ user, user: { messages, _id } }) => {
   const [myMessages, setMyMessages] = useState([]);
   const [messagesToMe, setMessagesToMe] = useState([]);
 
@@ -16,7 +16,7 @@ const Profile = ({ user: { messages, _id } }) => {
 
   useEffect(() => {
     parseMessages();
-  }, []);
+  }, [user]); //Updated to rerender on user data load, otherwise refresh does not show messages
 
   return (
     <Container fluid className='text-center mt-4'>

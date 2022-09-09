@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { Navbar, Register, Login } from './components';
+import { Navbar, Register, Login, ViewPost } from './components';
 import { Home, Posts, Profile } from './pages';
 import { getUserData } from './api';
 import { Container } from 'react-bootstrap';
@@ -45,7 +45,18 @@ const App = () => {
           <Route path='/' element={<Home id='Home' user={user} />} />
           <Route
             path='/posts'
-            element={<Posts user={user} isLoggedIn={isLoggedIn} jwt={jwt} />}
+            element={
+              <Posts
+                user={user}
+                isLoggedIn={isLoggedIn}
+                jwt={jwt}
+                navigate={navigate}
+              />
+            }
+          />
+          <Route
+            path='/posts/:postId'
+            element={<ViewPost user={user} navigate={navigate} jwt={jwt} />}
           />
           <Route path='/profile' element={<Profile user={user} />} />
           <Route

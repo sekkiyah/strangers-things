@@ -91,6 +91,25 @@ export const createPost = async (post, jwt) => {
   }
 };
 
+export const updatePost = async (postId, post, jwt) => {
+  try {
+    const header = makeHeaders(jwt);
+    return await fetch(`${baseURL}/posts/${postId}`, {
+      method: 'PATCH',
+      headers: header,
+      body: JSON.stringify({
+        post: post,
+      }),
+    }).then((response) => response.json());
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const deletePost = async (messageId, jwt) => {
+  console.log('deleted');
+};
+
 export const sendMessage = async (message, messageId, jwt) => {
   try {
     const header = makeHeaders(jwt);
@@ -104,8 +123,4 @@ export const sendMessage = async (message, messageId, jwt) => {
   } catch (err) {
     console.error(err);
   }
-};
-
-export const deleteMessage = async (messageId, jwt) => {
-  console.log('deleted');
 };

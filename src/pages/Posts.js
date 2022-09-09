@@ -3,7 +3,7 @@ import { Tab, Tabs } from 'react-bootstrap';
 import { getAllPosts } from '../api';
 import { AllPosts, MyPosts, CreatePost } from '../components/';
 
-const Posts = ({ isLoggedIn, jwt, user: { posts, _id } }) => {
+const Posts = ({ isLoggedIn, jwt, user: { posts, _id }, navigate }) => {
   const [allPosts, setAllPosts] = useState([]);
 
   async function fetchPosts() {
@@ -12,8 +12,6 @@ const Posts = ({ isLoggedIn, jwt, user: { posts, _id } }) => {
 
   useEffect(() => {
     fetchPosts();
-    console.log('All posts below');
-    console.log(allPosts);
   }, []);
 
   return (
@@ -31,6 +29,7 @@ const Posts = ({ isLoggedIn, jwt, user: { posts, _id } }) => {
             userId={_id}
             isLoggedIn={isLoggedIn}
             jwt={jwt}
+            navigate={navigate}
           />
         </Tab>
         {isLoggedIn && (
