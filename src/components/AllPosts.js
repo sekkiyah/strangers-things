@@ -1,11 +1,9 @@
 import React from 'react';
 import { Button, Card, ListGroup } from 'react-bootstrap';
-import { Navigate, Route } from 'react-router';
-import ViewPost from './ViewPost';
 import Message from './Message';
 import { Link } from 'react-router-dom';
 
-const AllPosts = ({ allPosts, userId, isLoggedIn, jwt, navigate }) => {
+const AllPosts = ({ allPosts, userId, isLoggedIn, jwt }) => {
   return (
     <ListGroup variant='flush'>
       {allPosts &&

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { Navbar, Register, Login, ViewPost } from './components';
-import { Home, Posts, Profile } from './pages';
+import { Navbar, Register, Login } from './components';
+import { Home, Posts, Profile, ViewPost } from './pages';
 import { getUserData } from './api';
 import { Container } from 'react-bootstrap';
 

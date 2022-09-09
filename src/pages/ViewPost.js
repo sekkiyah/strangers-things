@@ -20,7 +20,6 @@ const ViewPost = ({ jwt, navigate }) => {
   const handleSubmit = async () => {
     const result = await updatePost(_id, myPost, jwt);
     if (result.success) {
-      console.log(result);
       navigate('/posts');
     } else {
       console.error(result.error.message);
