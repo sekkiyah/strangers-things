@@ -1,40 +1,62 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Card, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Col, FloatingLabel, Form, Modal, Row } from 'react-bootstrap';
 import { createPost } from '../api';
 
-const CreatePost = ({ jwt }) => {
-  const [post, setPost] = useState({});
+const CreatePost = ({ jwt, fetchPosts, fetchMyPosts }) => {
+  const [showModal, setShowModal] = useState(false);
+
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [location, setLocation] = useState('');
   const [willDeliver, setWillDeliver] = useState(false);
 
-  const handleSubmit = async () => {
-    const response = await createPost(post, jwt);
-    if (response.success) {
-      console.log('successfully created post');
-    } else {
-      console.error(response.error.message);
-    }
+  const openModal = () => setShowModal(true);
+  const closeModal = () => {
+    setShowModal(false);
+    setTitle('');
+    setDescription('');
+    setPrice('');
+    setLocation('');
+    setWillDeliver(false);
   };
 
-  useEffect(() => {
-    setPost({
+  const handleSubmit = async () => {
+    const post = {
       title: title,
       description: description,
       price: price,
       location: location,
       willDeliver: willDeliver,
-    });
-  }, [title, description, price, location, willDeliver]);
+    };
+    const response = await createPost(post, jwt);
+    if (response.success) {
+      closeModal();
+      fetchPosts();
+      fetchMyPosts();
+    } else {
+      console.error(response.error.message);
+    }
+  };
 
   return (
     <>
-      <Card className='flex-fill mt-3 mx-5 shadow'>
-        <Card.Header as='h3' className='text-center'>
-          New Post
-        </Card.Header>
+      <Button
+        variant='success'
+        className='position-fixed sticky-bottom rounded-pill shadow'
+        size='lg'
+        style={{ bottom: '25px', right: '25px' }}
+        onClick={() => {
+          openModal();
+        }}
+      >
+        Create Post
+      </Button>
+
+      <Modal show={showModal} onHide={closeModal}>
+        <Modal.Header style={{ fontSize: '20px' }}>
+          <Modal.Title className='w-100 text-center'>New Post</Modal.Title>
+        </Modal.Header>
         <Form
           onSubmit={(e) => {
             e.preventDefault();
@@ -113,21 +135,15 @@ const CreatePost = ({ jwt }) => {
               Create Post
             </Button>
             <Button
-              variant='secondary'
+              variant='danger'
               className='mx-2 justify-self-end'
-              onClick={() => {
-                setTitle('');
-                setDescription('');
-                setPrice('');
-                setLocation('');
-                setWillDeliver(false);
-              }}
+              onClick={() => closeModal()}
             >
-              Clear Fields
+              Close
             </Button>
           </Form.Group>
         </Form>
-      </Card>
+      </Modal>
     </>
   );
 };

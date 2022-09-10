@@ -19,13 +19,14 @@ const Profile = ({ user, user: { messages, _id } }) => {
   }, [user]); //Updated to rerender on user data load, otherwise refresh does not show messages
 
   return (
+    // Update and move to own component
     <Container fluid className='text-center mt-4'>
       <h2>Messages to me</h2>
       {messagesToMe.length ? (
         messagesToMe.map((message) => (
           <React.Fragment key={message._id}>
+            <h5>From: {message.fromUser.username}</h5>
             <h4>{message.content}</h4>
-            <h5>From user: {message.fromUser.username}</h5>
           </React.Fragment>
         ))
       ) : (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Navbar, Register, Login } from './components';
-import { Home, Posts, Profile, ViewPost } from './pages';
+import { Home, Posts, Profile, EditPost } from './pages';
 import { getUserData } from './api';
 import { Container } from 'react-bootstrap';
 
@@ -39,7 +39,9 @@ const App = () => {
 
   return (
     <>
-      <Navbar isLoggedIn={isLoggedIn} logOut={logOut} />
+      <div className='sticky-top'>
+        <Navbar isLoggedIn={isLoggedIn} logOut={logOut} />
+      </div>
       <Container fluid id='main-app'>
         <Routes>
           <Route path='/' element={<Home id='Home' user={user} />} />
@@ -56,7 +58,7 @@ const App = () => {
           />
           <Route
             path='/posts/:postId'
-            element={<ViewPost user={user} navigate={navigate} jwt={jwt} />}
+            element={<EditPost user={user} navigate={navigate} jwt={jwt} />}
           />
           <Route path='/profile' element={<Profile user={user} />} />
           <Route

@@ -21,6 +21,17 @@ export const getAllPosts = async () => {
   }
 };
 
+export const getMyPosts = async (jwt) => {
+  try {
+    const header = makeHeaders(jwt);
+    return await fetch(`${baseURL}/posts`, {
+      headers: header,
+    }).then((response) => response.json());
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const getAllMessages = async () => {
   try {
     console.log('all messages');
@@ -106,8 +117,12 @@ export const updatePost = async (postId, post, jwt) => {
   }
 };
 
-export const deletePost = async (messageId, jwt) => {
-  console.log('deleted');
+export const deletePost = async (postId, jwt) => {
+  const header = makeHeaders(jwt);
+  return await fetch(`${baseURL}/posts/${postId}`, {
+    method: 'DELETE',
+    headers: header,
+  }).then((response) => response.json());
 };
 
 export const sendMessage = async (message, messageId, jwt) => {

@@ -1,12 +1,12 @@
 import React from 'react';
-import { Button, Card, ListGroup } from 'react-bootstrap';
+import { Card, ListGroup } from 'react-bootstrap';
 
-const MyPosts = ({ posts }) => {
+const MyPosts = ({ myPosts }) => {
   return (
-    posts && (
+    myPosts && (
       <ListGroup variant='flush'>
-        {posts.length ? (
-          posts.map((post) => {
+        {myPosts.length ? (
+          myPosts.map((post) => {
             const { description, location, price, title, willDeliver, _id } =
               post;
             return (

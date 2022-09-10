@@ -4,9 +4,9 @@ import { Button, Card, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import { updatePost } from '../api';
 
-const ViewPost = ({ jwt, navigate }) => {
+const EditPost = ({ jwt, navigate }) => {
   // const { postId } = useParams();
-  const loc = useLocation();
+  const loc = useLocation(); //follow up
   const { post } = loc.state;
   const { title, description, location, price, willDeliver, _id } = post;
 
@@ -133,4 +133,4 @@ const ViewPost = ({ jwt, navigate }) => {
   );
 };
 
-export default ViewPost;
+export default EditPost;

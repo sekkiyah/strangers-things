@@ -2,8 +2,27 @@ import React from 'react';
 import { Button, Card, ListGroup } from 'react-bootstrap';
 import Message from './Message';
 import { Link } from 'react-router-dom';
+import { deletePost } from '../api';
 
-const AllPosts = ({ allPosts, userId, isLoggedIn, jwt }) => {
+const AllPosts = ({
+  allPosts,
+  userId,
+  isLoggedIn,
+  jwt,
+  fetchPosts,
+  fetchMyPosts,
+}) => {
+  const handleDelete = async (post) => {
+    const response = confirm('Are you sure you want to delete?');
+    if (response) {
+      const result = await deletePost(post._id, jwt);
+      if (result.success) {
+        fetchPosts();
+        fetchMyPosts();
+      }
+    }
+  };
+
   return (
     <ListGroup variant='flush'>
       {allPosts &&
@@ -32,6 +51,13 @@ const AllPosts = ({ allPosts, userId, isLoggedIn, jwt }) => {
                       <Link to={`/posts/${_id}`} state={{ post: post }}>
                         <Button variant='info'>Edit post</Button>
                       </Link>
+                      <Button
+                        variant='danger'
+                        onClick={() => handleDelete(post)}
+                        className='mx-2'
+                      >
+                        Delete
+                      </Button>
                     </>
                   ) : (
                     <>
