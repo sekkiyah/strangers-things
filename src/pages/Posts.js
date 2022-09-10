@@ -3,7 +3,7 @@ import { Tab, Tabs } from 'react-bootstrap';
 import { getAllPosts, getMyPosts } from '../api';
 import { AllPosts, MyPosts, CreatePost } from '../components/';
 
-const Posts = ({ isLoggedIn, jwt, user: { posts, _id }, navigate }) => {
+const Posts = ({ isLoggedIn, jwt, user: { _id }, navigate }) => {
   const [allPosts, setAllPosts] = useState([]);
   const [myPosts, setMyPosts] = useState([]);
 
