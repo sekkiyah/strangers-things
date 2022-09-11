@@ -135,7 +135,7 @@ const CreatePost = ({ jwt, fetchPosts, fetchMyPosts }) => {
               Create Post
             </Button>
             <Button
-              variant='danger'
+              variant='secondary'
               className='mx-2 justify-self-end'
               onClick={() => closeModal()}
             >

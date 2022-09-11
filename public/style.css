@@ -12,3 +12,8 @@
 #navbar {
   gap: 10px;
 }
+
+div.accordion-item {
+  --bs-accordion-active-color: none;
+  --bs-accordion-active-bg: none;
+}

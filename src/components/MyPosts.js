@@ -7,8 +7,16 @@ const MyPosts = ({ myPosts }) => {
       <ListGroup variant='flush' className=''>
         {myPosts.length ? (
           myPosts.map((post) => {
-            const { description, location, price, title, willDeliver, _id } =
-              post;
+            const {
+              description,
+              location,
+              price,
+              title,
+              willDeliver,
+              _id,
+              messages,
+            } = post;
+            console.log(messages);
             return (
               <ListGroup.Item key={_id} className=' px-0 py-3 mx-3'>
                 <Card.Title as='h2'>{title}</Card.Title>

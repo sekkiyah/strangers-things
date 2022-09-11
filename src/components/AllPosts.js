@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Card, Form, InputGroup, ListGroup } from 'react-bootstrap';
-import Message from './Message';
+import MessageForm from './MessageForm';
 import { Link } from 'react-router-dom';
-import { deletePost } from '../api';
+import { deletePost, getPostById } from '../api';
 
 const AllPosts = ({
   allPosts,
@@ -23,6 +23,8 @@ const AllPosts = ({
       return post;
     }
   }
+  const result = getPostById('6316d8897835aa001715e889');
+  console.log(result);
 
   const filteredPosts = allPosts.filter((post) =>
     postMatches(post, searchTerm)
@@ -92,7 +94,7 @@ const AllPosts = ({
                         </>
                       ) : (
                         <>
-                          <Message post={post} jwt={jwt} />
+                          <MessageForm post={post} jwt={jwt} />
                         </>
                       )}
                     </>

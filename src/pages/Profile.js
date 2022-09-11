@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Accordion, Card, Container } from 'react-bootstrap';
+import { useAccordionButton } from 'react-bootstrap/AccordionButton';
+import { Messages } from '../components';
 
 const Profile = ({ user, user: { messages, _id } }) => {
   const [myMessages, setMyMessages] = useState([]);
@@ -14,35 +16,34 @@ const Profile = ({ user, user: { messages, _id } }) => {
     }
   };
 
+  console.log(myMessages);
+  console.log(messagesToMe);
+
   useEffect(() => {
     parseMessages();
   }, [user]); //Updated to rerender on user data load, otherwise refresh does not show messages
 
   return (
-    // Update and move to own component
-    <Container fluid className='text-center mt-4'>
-      <h2>Messages to me</h2>
-      {messagesToMe.length ? (
-        messagesToMe.map((message) => (
-          <React.Fragment key={message._id}>
-            <h5>From: {message.fromUser.username}</h5>
-            <h4>{message.content}</h4>
-          </React.Fragment>
-        ))
-      ) : (
-        <h4>No messages found</h4>
-      )}
+    <Container fluid className='mt-3'>
+      <Accordion alwaysOpen className='text-center'>
+        <Accordion.Item>
+          <Accordion.Header>Messages To Me</Accordion.Header>
+          <Accordion.Body>
+            <Messages messageArray={messagesToMe} />
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
 
       <br />
 
-      <h2>Messages from me</h2>
-      {myMessages.length ? (
-        myMessages.map((message) => (
-          <h4 key={message._id}>{message.content}</h4>
-        ))
-      ) : (
-        <h4>No messages found</h4>
-      )}
+      <Accordion alwaysOpen className='text-center'>
+        <Accordion.Item>
+          <Accordion.Header>Messages From Me</Accordion.Header>
+          <Accordion.Body>
+            <Messages messageArray={myMessages} />
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
     </Container>
   );
 };

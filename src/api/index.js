@@ -32,6 +32,19 @@ export const getMyPosts = async (jwt) => {
   }
 };
 
+export const getPostById = async (postId) => {
+  try {
+    const response = await fetch(`${baseURL}/posts`).then((response) =>
+      response.json()
+    );
+    if (response.success && response.data.posts) {
+      return response.data.posts.find((post) => post._id === postId);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const getAllMessages = async () => {
   try {
     console.log('all messages');

@@ -17,6 +17,8 @@ const EditPost = ({ jwt, navigate }) => {
   const [postWillDeliver, setPostWillDeliver] = useState(willDeliver);
   const [myPost, setPost] = useState({});
 
+  //Update
+
   const handleSubmit = async () => {
     const result = await updatePost(_id, myPost, jwt);
     if (result.success) {

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 import { sendMessage } from '../api';
 
-const Message = ({ post, jwt }) => {
-  const { location, price, title, _id, author } = post;
+const MessageForm = ({ post, jwt }) => {
+  const { location, price, title, _id, author, description } = post;
   const [showModal, setShowModal] = useState(false);
   const [messageDetails, setMessageDetails] = useState('');
 
@@ -18,6 +18,7 @@ const Message = ({ post, jwt }) => {
     if (response.success) {
       closeModal();
       setMessageDetails('');
+      console.log(response);
     } else {
       console.error(result.error.message);
     }
@@ -34,7 +35,12 @@ const Message = ({ post, jwt }) => {
         Send message
       </Button>
 
-      <Modal show={showModal} onHide={closeModal} style={{ fontSize: '20px' }}>
+      <Modal
+        show={showModal}
+        onHide={closeModal}
+        style={{ fontSize: '20px' }}
+        size='lg'
+      >
         <Form
           onSubmit={(e) => {
             e.preventDefault();
@@ -70,6 +76,24 @@ const Message = ({ post, jwt }) => {
               </Col>
             </Form.Group>
 
+            <Form.Group as={Row}>
+              <Form.Label column sm='12'>
+                Description:
+              </Form.Label>
+            </Form.Group>
+
+            <Form.Group>
+              <Col sm='12'>
+                <Form.Control
+                  as='textarea'
+                  rows={3}
+                  plaintext
+                  readOnly
+                  defaultValue={description}
+                />
+              </Col>
+            </Form.Group>
+
             <br />
 
             <Form.Group controlId='detail'>
@@ -99,4 +123,4 @@ const Message = ({ post, jwt }) => {
   );
 };
 
-export default Message;
+export default MessageForm;
