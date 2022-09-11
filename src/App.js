@@ -42,7 +42,7 @@ const App = () => {
       <div className='sticky-top'>
         <Navbar isLoggedIn={isLoggedIn} logOut={logOut} />
       </div>
-      <Container fluid id='main-app'>
+      <Container className='px-0' fluid id='main-app'>
         <Routes>
           <Route path='/' element={<Home id='Home' user={user} />} />
           <Route

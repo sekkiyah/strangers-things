@@ -44,7 +44,7 @@ const Posts = ({ isLoggedIn, jwt, user: { _id }, navigate }) => {
         defaultActiveKey='all-posts'
         justify='true'
         variant='pills'
-        className='bg-light my-1'
+        className='bg-dark'
         style={{ fontSize: '25px' }}
       >
         <Tab eventKey='all-posts' title='All Posts'>

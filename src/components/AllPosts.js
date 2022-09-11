@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Card, Form, ListGroup } from 'react-bootstrap';
+import { Button, Card, Form, InputGroup, ListGroup } from 'react-bootstrap';
 import Message from './Message';
 import { Link } from 'react-router-dom';
 import { deletePost } from '../api';
@@ -44,11 +44,16 @@ const AllPosts = ({
     <ListGroup variant='flush'>
       {postsToDisplay && (
         <>
-          <Form.Control
-            className='my-2 p-2 text-white bg-dark'
-            placeholder='Search Posts'
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+          <InputGroup className='p-2 text-white bg-dark'>
+            <Form.Control
+              placeholder='Search Posts'
+              onChange={(e) => setSearchTerm(e.target.value)}
+              value={searchTerm}
+            />
+            <Button variant='info' onClick={() => setSearchTerm('')}>
+              Clear
+            </Button>
+          </InputGroup>
           {postsToDisplay.length ? (
             postsToDisplay.map((post) => {
               const {
@@ -62,7 +67,7 @@ const AllPosts = ({
               } = post;
 
               return (
-                <ListGroup.Item key={_id} className='px-1 pt-1 pb-3 mb-3'>
+                <ListGroup.Item key={_id} className='px-0 py-3 mx-3'>
                   <Card.Title as='h2'>{title}</Card.Title>
                   <Card.Text>Description: {description}</Card.Text>
                   <Card.Text>Price: {price}</Card.Text>
@@ -96,7 +101,7 @@ const AllPosts = ({
               );
             })
           ) : (
-            <h3>Loading...</h3>
+            <h3 className='text-center mt-4'>No Posts Found</h3>
           )}
         </>
       )}
