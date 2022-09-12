@@ -45,14 +45,6 @@ export const getPostById = async (postId) => {
   }
 };
 
-export const getAllMessages = async () => {
-  try {
-    console.log('all messages');
-  } catch (err) {
-    console.error(err);
-  }
-};
-
 export const loginUser = async (username, password) => {
   try {
     const header = makeHeaders();
@@ -85,7 +77,7 @@ export const registerUser = async (username, password) => {
       }),
     }).then((response) => response.json());
   } catch (err) {
-    console.log('error registering user');
+    console.error('error registering user', error);
   }
 };
 
