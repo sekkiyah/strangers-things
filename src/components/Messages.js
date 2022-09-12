@@ -48,9 +48,9 @@ const Messages = ({ messageArray }) => {
               </Form.Group>
             </Form>
             {/* Build out later */}
-            <Button variant='success' className='mt-3'>
+            {/* <Button variant='success' className='mt-3'>
               View Post
-            </Button>
+            </Button> */}
           </ListGroup.Item>
         );
       })}

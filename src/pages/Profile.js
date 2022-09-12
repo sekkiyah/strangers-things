@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Accordion, Card, Container } from 'react-bootstrap';
-import { useAccordionButton } from 'react-bootstrap/AccordionButton';
+import { Accordion, Container } from 'react-bootstrap';
 import { Messages } from '../components';
 
 const Profile = ({ user, user: { messages, _id } }) => {
@@ -15,9 +14,6 @@ const Profile = ({ user, user: { messages, _id } }) => {
       setMessagesToMe(toMe);
     }
   };
-
-  console.log(myMessages);
-  console.log(messagesToMe);
 
   useEffect(() => {
     parseMessages();

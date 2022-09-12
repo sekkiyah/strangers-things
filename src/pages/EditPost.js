@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Card, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
-// import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { updatePost } from '../api';
 
 const EditPost = ({ jwt, navigate }) => {
-  // const { postId } = useParams();
-  const loc = useLocation(); //follow up
+  const loc = useLocation();
   const { post } = loc.state;
   const { title, description, location, price, willDeliver, _id } = post;
 
@@ -15,28 +13,22 @@ const EditPost = ({ jwt, navigate }) => {
   const [myLocation, setMyLocation] = useState(location);
   const [myPrice, setMyPrice] = useState(price);
   const [postWillDeliver, setPostWillDeliver] = useState(willDeliver);
-  const [myPost, setPost] = useState({});
-
-  //Update
 
   const handleSubmit = async () => {
-    const result = await updatePost(_id, myPost, jwt);
+    const updatedPost = {
+      title: myTitle,
+      description: myDescription,
+      location: myLocation,
+      price: myPrice,
+      willDeliver: postWillDeliver,
+    };
+    const result = await updatePost(_id, updatedPost, jwt);
     if (result.success) {
       navigate('/posts');
     } else {
       console.error(result.error.message);
     }
   };
-
-  useEffect(() => {
-    setPost({
-      title: myTitle,
-      description: myDescription,
-      location: myLocation,
-      price: myPrice,
-      willDeliver: postWillDeliver,
-    });
-  }, [myTitle, myDescription, myLocation, myPrice, postWillDeliver]);
 
   return (
     <>

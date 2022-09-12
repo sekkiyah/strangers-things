@@ -18,7 +18,6 @@ const MessageForm = ({ post, jwt }) => {
     if (response.success) {
       closeModal();
       setMessageDetails('');
-      console.log(response);
     } else {
       console.error(result.error.message);
     }

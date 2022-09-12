@@ -16,7 +16,6 @@ const MyPosts = ({ myPosts }) => {
               _id,
               messages,
             } = post;
-            console.log(messages);
             return (
               <ListGroup.Item key={_id} className=' px-0 py-3 mx-3'>
                 <Card.Title as='h2'>{title}</Card.Title>
