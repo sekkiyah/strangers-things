@@ -4,6 +4,7 @@ import { Container } from 'react-bootstrap';
 const Home = ({ user }) => {
   const githubURL = 'https://github.com/sekkiyah/strangers-things';
 
+  //Flush out later
   return (
     <Container fluid className='text-center mt-4'>
       <h2>

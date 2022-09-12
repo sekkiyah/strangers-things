@@ -14,7 +14,7 @@ const MyPosts = ({ myPosts }) => {
               title,
               willDeliver,
               _id,
-              messages,
+              messages, //Add link to messages for selected post later
             } = post;
             return (
               <ListGroup.Item key={_id} className=' px-0 py-3 mx-3'>
