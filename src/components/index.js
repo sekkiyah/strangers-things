@@ -1,4 +1,4 @@
-export { default as NavBar } from './NavBar';
+export { default as Navbar } from './NavBar';
 export { default as MyPosts } from './MyPosts';
 export { default as AllPosts } from './AllPosts';
 export { default as CreatePost } from './CreatePost';

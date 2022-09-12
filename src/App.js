@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { NavBar, Register, Login } from './components';
+import { Navbar, Register, Login } from './components';
 import { Home, Posts, Profile, EditPost } from './pages';
 import { getUserData } from './api';
 import { Container } from 'react-bootstrap';
@@ -40,7 +40,7 @@ const App = () => {
   return (
     <>
       <div className='sticky-top'>
-        <NavBar isLoggedIn={isLoggedIn} logOut={logOut} />
+        <Navbar isLoggedIn={isLoggedIn} logOut={logOut} />
       </div>
       <Container className='px-0' fluid id='main-app'>
         <Routes>
