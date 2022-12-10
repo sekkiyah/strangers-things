@@ -1,1 +1,4 @@
 node_modules
+src/images/
+.DS_Store
+src/.DS_Store
